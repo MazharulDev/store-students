@@ -69,8 +69,8 @@ const AddStudent = () => {
                     </div>
 
                     <div className='grid grid-cols-2 gap-4 mx-10 mt-10'>
-                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressOne", { required: true })} placeholder="Address Line 1" ></textarea>
-                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressTwo", { required: true })} placeholder="Address Line 2"></textarea>
+                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressOne")} placeholder="Address Line 1" required></textarea>
+                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressTwo")} placeholder="Address Line 2" required></textarea>
                     </div>
                     <div className='grid grid-cols-3 gap-4 mx-10 mt-4'>
                         <input className='p-2 rounded-md bg-white border' type="text" {...register("landmark", { required: true })} placeholder="Landmark" />

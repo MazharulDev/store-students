@@ -7,6 +7,7 @@ const EditInfo = () => {
     const { register, handleSubmit, reset } = useForm();
     const id = useParams();
     const [student, setStudent] = useState({})
+    const { firstName, middleName, lastName, AddressOne, AddressTwo, City, className, divition, landmark, pincode, roll } = student;
     useEffect(() => {
         fetch(`https://store-students.onrender.com/students/${id.id}`)
             .then(res => res.json())
@@ -41,12 +42,12 @@ const EditInfo = () => {
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='grid grid-cols-3 gap-4 mx-10 mt-8'>
-                        <input className='p-2 rounded-md bg-white border' type="text" {...register("firstName", { required: true })} placeholder="First Name" />
-                        <input className='p-2 rounded-md bg-white border' type="text" {...register("middleName")} placeholder="Middle Name" />
-                        <input className='p-2 rounded-md bg-white border' type="text" {...register("lastName", { required: true })} placeholder="Last Name" />
+                        <input className='p-2 rounded-md bg-white border' type="text" {...register("firstName", { required: true })} placeholder="First Name" defaultValue={firstName} />
+                        <input className='p-2 rounded-md bg-white border' type="text" {...register("middleName")} placeholder="Middle Name" defaultValue={middleName} />
+                        <input className='p-2 rounded-md bg-white border' type="text" {...register("lastName", { required: true })} placeholder="Last Name" defaultValue={lastName} />
                     </div>
                     <div className='grid grid-cols-3 gap-4 mx-10 mt-4'>
-                        <select className='p-2 rounded-md bg-white border ' {...register("className", { required: true })}>
+                        <select className='p-2 rounded-md bg-white border ' {...register("className", { required: true })} >
                             <option disabled selected >Select Class</option>
                             <option value="1">Class 1</option>
                             <option value="2">Class 2</option>
@@ -69,18 +70,18 @@ const EditInfo = () => {
                             <option value="D">D</option>
                             <option value="E">E</option>
                         </select>
-                        <input className='p-2 rounded-md bg-white border' type="number" {...register("roll", { required: true })} placeholder="Enter Roll Number in 2 Digits" />
+                        <input className='p-2 rounded-md bg-white border' type="number" {...register("roll", { required: true })} placeholder="Enter Roll Number in 2 Digits" defaultValue={roll} />
 
                     </div>
 
                     <div className='grid grid-cols-2 gap-4 mx-10 mt-10'>
-                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressOne", { required: true })} placeholder="Address Line 1" ></textarea>
-                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressTwo", { required: true })} placeholder="Address Line 2"></textarea>
+                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressOne", { required: true })} placeholder="Address Line 1" defaultValue={AddressOne}></textarea>
+                        <textarea className='p-2 rounded-md bg-white border' {...register("AddressTwo", { required: true })} placeholder="Address Line 2" defaultValue={AddressTwo}></textarea>
                     </div>
                     <div className='grid grid-cols-3 gap-4 mx-10 mt-4'>
-                        <input className='p-2 rounded-md bg-white border' type="text" {...register("landmark", { required: true })} placeholder="Landmark" />
-                        <input className='p-2 rounded-md bg-white border' type="text" {...register("City", { required: true })} placeholder="City" />
-                        <input className='p-2 rounded-md bg-white border' type="number" {...register("pincode", { required: true })} placeholder="Enter pin number in 6 Digits" />
+                        <input className='p-2 rounded-md bg-white border' type="text" {...register("landmark", { required: true })} placeholder="Landmark" defaultValue={landmark} />
+                        <input className='p-2 rounded-md bg-white border' type="text" {...register("City", { required: true })} placeholder="City" defaultValue={City} />
+                        <input className='p-2 rounded-md bg-white border' type="number" {...register("pincode", { required: true })} placeholder="Enter pin number in 6 Digits" defaultValue={pincode} />
                     </div>
                     <input className='px-10 py-3 bg-slate-600 hover:bg-slate-700 text-white mx-10 mt-4 rounded-lg cursor-pointer' type="submit" />
                 </form>
