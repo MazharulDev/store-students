@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -15,28 +15,23 @@ const Login = () => {
         loadingWithEmail,
         errorWithEmail,
     ] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle, userWithGoogle, loadingWithGoogle, errorWithGoogle] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password)
     };
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-    }
+
     const location = useLocation();
     let from = location.state?.from?.pathname || '/';
 
-    if (userWithGoogle || userWithEmail) {
+    if (userWithEmail) {
         toast('Login successfully');
         navigate(from, { replace: true });
     }
-    if (errorWithGoogle) {
-        toast.error(errorWithGoogle?.message)
-    }
+
     if (errorWithEmail) {
         toast.error(errorWithEmail?.message)
     }
-    if (loadingWithEmail || loadingWithGoogle) {
+    if (loadingWithEmail) {
         return <p>Loading...</p>
     }
     return (
@@ -115,8 +110,6 @@ const Login = () => {
                         <input className='btn btn-primary text-white w-full' type="submit" value="Login" />
                     </form>
                     <p><small>New to Student ?  <Link className='text-blue-500 hover:underline' to="/signup">Create New Account</Link></small></p>
-                    <div className="divider">OR</div>
-                    <button onClick={handleGoogleSignIn} className='btn btn-outline btn-secondary hover:text-white w-full'>Sign In with Google</button>
 
                 </div>
             </div>
