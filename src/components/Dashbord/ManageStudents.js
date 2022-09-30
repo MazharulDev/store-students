@@ -5,7 +5,7 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import { RiDeleteBinLine } from 'react-icons/ri'
 
 const ManageStudents = () => {
-    const { data: students, isLoading, refetch } = useQuery('taskList', () => fetch('http://localhost:5000/students', {
+    const { data: students, isLoading, refetch } = useQuery('taskList', () => fetch('https://store-students.onrender.com/students', {
         method: 'GET',
     })
         .then(res => res.json()))
@@ -14,14 +14,18 @@ const ManageStudents = () => {
         return <p>Loading...</p>
     }
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/students/${id}`
-        fetch(url, {
-            method: 'DELETE',
-        })
-            .then(res => res.json())
-            .then(data => {
-                refetch()
+        const proceed = window.confirm("Are you sure?")
+        if (proceed) {
+            const url = `https://store-students.onrender.com/students/${id}`
+            fetch(url, {
+                method: 'DELETE',
             })
+                .then(res => res.json())
+                .then(data => {
+                    refetch()
+                })
+        }
+
     }
     return (
         <div>
