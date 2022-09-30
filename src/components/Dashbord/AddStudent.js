@@ -14,7 +14,7 @@ const AddStudent = () => {
         if (data.pincode.length !== 6) {
             return toast.error("Pincode must 6 digits should be given")
         }
-        fetch('http://localhost:5000/students', {
+        fetch('https://store-students.onrender.com/students', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
