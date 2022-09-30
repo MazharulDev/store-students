@@ -19,7 +19,7 @@ const Sidebar = () => {
                 <div className="drawer-side">
                     <label htmlFor="dashbord-sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-                        <li><Link to="/"><FiUsers className='text-2xl' /> Add Student</Link></li>
+                        <li><Link to="/"><FiUsers className='text-3xl' /> Add Student</Link></li>
                         <li><Link to="/manage-students"><MdManageAccounts className='text-3xl' /> Manage Students</Link></li>
                         <li><button onClick={() => signOut(auth)}><HiOutlineLogout className='text-3xl' /> Logout</button></li>
                     </ul>
