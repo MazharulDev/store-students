@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const AddStudent = () => {
-    const current = new Date();
-    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
-
+const EditInfo = () => {
     const { register, handleSubmit, reset } = useForm();
+    const id = useParams();
+    const [student, setStudent] = useState({})
+    useEffect(() => {
+        fetch(`https://store-students.onrender.com/students/${id.id}`)
+            .then(res => res.json())
+            .then(data => setStudent(data))
+    }, [id])
     const onSubmit = data => {
         if (data.roll.length !== 2) {
             return toast.error("Roll must 2 digits should be given")
@@ -14,8 +19,8 @@ const AddStudent = () => {
         if (data.pincode.length !== 6) {
             return toast.error("Pincode must 6 digits should be given")
         }
-        fetch('https://store-students.onrender.com/students', {
-            method: 'POST',
+        fetch(`https://store-students.onrender.com/students/${id.id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -23,15 +28,15 @@ const AddStudent = () => {
         })
             .then(res => res.json())
             .then(result => {
-                toast("Successfully added student")
+                console.log(result);
+                toast.success("Student update successfully")
                 reset()
             })
     }
     return (
         <div>
-            <div className='flex justify-between items-center mx-4'>
-                <h2 className='text-lg font-bold'>Add student</h2>
-                <p>{date}</p>
+            <div>
+                <h2 className='text-2xl font-bold'>Update Student information</h2>
             </div>
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,4 +89,4 @@ const AddStudent = () => {
     );
 };
 
-export default AddStudent;
+export default EditInfo;

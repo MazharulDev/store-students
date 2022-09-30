@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 import { FiEye } from 'react-icons/fi'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { RiDeleteBinLine } from 'react-icons/ri'
+import { Link } from 'react-router-dom';
 
 const ManageStudents = () => {
     const { data: students, isLoading, refetch } = useQuery('taskList', () => fetch('https://store-students.onrender.com/students', {
@@ -13,6 +14,7 @@ const ManageStudents = () => {
     if (isLoading) {
         return <p>Loading...</p>
     }
+
     const handleDelete = (id) => {
         const proceed = window.confirm("Are you sure?")
         if (proceed) {
@@ -47,12 +49,12 @@ const ManageStudents = () => {
                                 <tbody key={student._id}>
                                     <tr>
                                         <th>{index + 1}</th>
-                                        <td>{student.firstName}{student.lastName}</td>
-                                        <td>{student.class}-{student.divition}</td>
+                                        <td>{student.firstName} {student.lastName}</td>
+                                        <td>{student.className}-{student.divition}</td>
                                         <td>{student.roll}</td>
                                         <td className='flex items-center gap-6'>
-                                            <button><FiEye className='text-2xl' /></button>
-                                            <button><AiOutlineEdit className='text-2xl' /></button>
+                                            <Link to={`/student-info/${student._id}`}><button><FiEye className='text-2xl' /></button></Link>
+                                            <Link to={`/edit-info/${student._id}`}><button><AiOutlineEdit className='text-2xl' /></button></Link>
                                             <button onClick={() => handleDelete(student._id)}><RiDeleteBinLine className='text-2xl' /></button>
                                         </td>
                                     </tr>
