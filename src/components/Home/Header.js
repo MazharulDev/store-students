@@ -3,11 +3,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { FiUser } from 'react-icons/fi'
 import { AiOutlineMenuUnfold } from 'react-icons/ai'
+import Loading from '../../shared/Loading/Loading';
 
 const Header = () => {
     const [user, loading] = useAuthState(auth);
     if (loading) {
-        return <p>Loading...</p>
+        return <Loading />
     }
     return (
         <div className='p-4 flex justify-between items-center ml-6 mr-10'>

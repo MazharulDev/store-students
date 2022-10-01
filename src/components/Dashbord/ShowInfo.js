@@ -9,7 +9,6 @@ const ShowInfo = () => {
             .then(res => res.json())
             .then(data => setStudent(data))
     }, [id])
-    console.log(student);
     const { firstName, middleName, lastName, AddressOne, AddressTwo, City, className, divition, landmark, pincode, roll } = student;
     return (
         <div>

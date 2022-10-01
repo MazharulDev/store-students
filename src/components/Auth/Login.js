@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import Loading from '../../shared/Loading/Loading';
 
 
 
@@ -32,7 +33,7 @@ const Login = () => {
         toast.error(errorWithEmail?.message)
     }
     if (loadingWithEmail) {
-        return <p>Loading...</p>
+        return <Loading />
     }
     return (
         <div className='flex justify-center items-center h-screen'>

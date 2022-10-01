@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const EditInfo = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, reset } = useForm();
     const id = useParams();
     const [student, setStudent] = useState({})
@@ -32,6 +33,7 @@ const EditInfo = () => {
                 console.log(result);
                 toast.success("Student update successfully")
                 reset()
+                navigate('/manage-students')
             })
     }
     return (

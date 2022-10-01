@@ -1,8 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AddStudent = () => {
+    const navigate = useNavigate()
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
@@ -25,6 +27,7 @@ const AddStudent = () => {
             .then(result => {
                 toast("Successfully added student")
                 reset()
+                navigate('/manage-students')
             })
     }
     return (

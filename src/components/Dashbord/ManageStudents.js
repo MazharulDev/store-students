@@ -4,6 +4,7 @@ import { FiEye } from 'react-icons/fi'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { Link } from 'react-router-dom';
+import Loading from '../../shared/Loading/Loading';
 
 const ManageStudents = () => {
     const { data: students, isLoading, refetch } = useQuery('taskList', () => fetch('https://store-students.onrender.com/students', {
@@ -12,7 +13,7 @@ const ManageStudents = () => {
         .then(res => res.json()))
     refetch()
     if (isLoading) {
-        return <p>Loading...</p>
+        return <Loading />
     }
 
     const handleDelete = (id) => {
